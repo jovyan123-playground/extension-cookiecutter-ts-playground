@@ -124,6 +124,8 @@ jobs:
         jupyter labextension list 2>&1 | grep -ie "my_lab_extension.*OK"
         jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "myextension.*OK"
+
+        jupyter lab build --dev-build --no-minimize
         python -m jupyterlab.browser_check
 
         pip uninstall -y myextension jupyterlab
