@@ -58,6 +58,7 @@ jobs:
         pushd myextension
         jlpm install && jlpm run eslint:check
         pip install -e .
+        jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "myextension.*OK"
         python -m jupyterlab.browser_check
 
@@ -76,7 +77,9 @@ jobs:
         # Trick to use custom parameters
         python -c "from cookiecutter.main import cookiecutter; import json; f = open('cookiecutter_with_server.json'); cookiecutter('.', extra_context=json.load(f), no_input=True); f.close()"
         pip install ./myextension
+        jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "myextension.*OK"
+        jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "my_lab_extension.*OK"
         python -m jupyterlab.browser_check
 
@@ -90,7 +93,9 @@ jobs:
         python -c "from cookiecutter.main import cookiecutter; import json; f = open('cookiecutter_with_server.json'); cookiecutter('.', extra_context=json.load(f), no_input=True); f.close()"
         pushd myextension
         pip install -e .
+        jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "myextension.*OK"
+        jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "my_lab_extension.*OK"
         python -m jupyterlab.browser_check
 
@@ -112,7 +117,9 @@ jobs:
         jupyter lab clean --all
         python setup.py sdist
         pip install dist/*.tar.gz
+        jupyter labextension list
         jupyter labextension list 2>&1 | grep -ie "my_lab_extension.*OK"
+        jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "myextension.*OK"
         python -m jupyterlab.browser_check
 
