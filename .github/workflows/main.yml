@@ -53,6 +53,7 @@ jobs:
 
     - name: Create pure frontend extension
       run: |
+        set -eux
         cookiecutter . --no-input
         pushd myextension
         jlpm install && jlpm run eslint:check
@@ -71,6 +72,7 @@ jobs:
 
     - name: Create server extension pip install
       run: |
+        set -eux
         # Trick to use custom parameters
         python -c "from cookiecutter.main import cookiecutter; import json; f = open('cookiecutter_with_server.json'); cookiecutter('.', extra_context=json.load(f), no_input=True); f.close()"
         pip install ./myextension
@@ -83,6 +85,7 @@ jobs:
 
     - name: Create server extension pip develop
       run: |
+        set -eux
         # Trick to use custom parameters
         python -c "from cookiecutter.main import cookiecutter; import json; f = open('cookiecutter_with_server.json'); cookiecutter('.', extra_context=json.load(f), no_input=True); f.close()"
         pushd myextension
@@ -101,6 +104,7 @@ jobs:
 
     - name: Install server extension from a tarball
       run: |
+        set -eux
         # Trick to use custom parameters
         python -c "from cookiecutter.main import cookiecutter; import json; f = open('cookiecutter_with_server.json'); cookiecutter('.', extra_context=json.load(f), no_input=True); f.close()"
         pushd myextension
