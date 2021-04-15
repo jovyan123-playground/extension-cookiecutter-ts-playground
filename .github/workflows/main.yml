@@ -95,6 +95,7 @@ jobs:
         pushd myextension
         pip install -e .
         jupyter labextension develop . --overwrite
+        jupyter server extension enable myextension
         jupyter server extension list
         jupyter server extension list 2>&1 | grep -ie "myextension.*OK"
         jupyter labextension list
