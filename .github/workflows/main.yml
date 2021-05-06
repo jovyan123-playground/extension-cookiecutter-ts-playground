@@ -167,6 +167,10 @@ jobs:
     - name: Install and Test
       run: |
         set -eux
+        # Remove NodeJS, twice to take care of system and locally installed node versions.
+        sudo rm -rf $(which node)
+        sudo rm -rf $(which node)
+
         pip install myextension.tar.gz
         pip install jupyterlab
         jupyter labextension list 2>&1 | grep -ie "my_lab_extension.*OK"
